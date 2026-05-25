@@ -19,9 +19,14 @@ function MainPage() {
 
                 </div>
                 <div className="favourite-area">
-                    <input type="text" />
-                    <button className="btn add-btn">Add to Favourite List</button>
-                    <button className="btn look-btn">Look at Favourite List</button>
+                    <div className="favourite-list">
+
+                    </div>
+                    <div className="control">
+                        <input type="text" />
+                        <button className="btn add-btn">Add to Favourite List</button>
+                        <button className="btn look-btn">Look at Favourite List</button>
+                    </div>
                 </div>
             </div>
         </div>
