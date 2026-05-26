@@ -4,6 +4,8 @@ export default function MainPage() {
     const [search, setSearch] = useState("");
     const [movies, setMovies] = useState([]);
     const [favourites, setFavourites] = useState([]);
+    const [listName, setListName] = useState("");
+    const [savedListId, setSavedListId] = useState("")
 
     useEffect(() => {
         const defaultMovieIds = ["tt0111161", "tt0468569", "tt0109830"];
@@ -59,7 +61,32 @@ export default function MainPage() {
         });
 
         setFavourites(filtered);
-    } 
+    }
+    
+    const saveList = () => {
+        const movieIds = favourites.map(favourite => favourite.imdbID);
+
+        fetch("https://acb-api.algoritmika.org/api/movies/list", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                title: listName,
+                movies: movieIds
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            setSavedListId(data.id);
+            const allLists = JSON.parse(localStorage.getItem("myLists")) || [];
+            allLists.push({ id: data.id, title: listName, movies: favourites });
+            localStorage.setItem("myLists", JSON.stringify(allLists));
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
 
     return (
         <div className="main-page">
@@ -108,9 +135,15 @@ export default function MainPage() {
                         }
                     </div>
                     <div className="control">
-                        <input type="text" />
-                        <button className="btn add-btn" disabled={favourites.length == 0}>Add to Favourite List</button>
-                        <button className="btn look-btn">Look at Favourite List</button>
+                        <input type="text" onChange={(event) => setListName(event.target.value)} />
+                        <button className="btn add-btn" disabled={favourites.length == 0 || !listName.trim()} 
+                            onClick={saveList}>
+                                Add to Favourite List
+                        </button>
+                        <button className="btn look-btn" disabled={!savedListId} 
+                            onClick={() => window.location.href = `/list/${listId}`}>
+                                Look at Favourite List
+                        </button>
                     </div>
                 </div>
             </div>

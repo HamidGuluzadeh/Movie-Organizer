@@ -7,7 +7,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.main-page .heading {
+.heading {
     width: 100%;
     height: 50px;
     background-color: rgb(255, 24, 101);
@@ -17,7 +17,7 @@
     color: white;
 }
 
-.main-page .heading h1 {
+.heading h1 {
     font-weight: 900;
     font-style: italic;
 }
@@ -50,6 +50,7 @@
     font-size: 15px;
 }
 
+.main-page 
 .container {
     padding: 20px;
     display: flex;
@@ -60,7 +61,15 @@
     margin: auto;
 }
 
-.movies, .favourite-area {
+.list-page .container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+}
+
+.movies, .favourite-area, .lists-area {
     border: 1px solid #cc7777;
     border-radius: 8px;
     padding: 20px;
