@@ -5,9 +5,16 @@ export default function MainPage() {
     const [movies, setMovies] = useState([]);
     const [favourites, setFavourites] = useState([]);
     const [listName, setListName] = useState("");
-    const [savedListId, setSavedListId] = useState("")
+    const [savedListId, setSavedListId] = useState("");
+    const [hasSavedLists, setHasSavedLists] = useState(false);
 
     useEffect(() => {
+        const lists = JSON.parse(localStorage.getItem("myLists")) || [];
+
+        if (lists.length > 0) {
+            setHasSavedLists(true);
+        }
+
         const defaultMovieIds = ["tt0111161", "tt0468569", "tt0109830"];
         const fetchedMovies = [];
 
@@ -79,9 +86,13 @@ export default function MainPage() {
         .then(response => response.json())
         .then(data => {
             setSavedListId(data.id);
+
             const allLists = JSON.parse(localStorage.getItem("myLists")) || [];
             allLists.push({ id: data.id, title: listName, movies: favourites });
+
             localStorage.setItem("myLists", JSON.stringify(allLists));
+
+            setHasSavedLists(true);
         })
         .catch(error => {
             console.error("Error:", error);
@@ -140,8 +151,8 @@ export default function MainPage() {
                             onClick={saveList}>
                                 Add to Favourite List
                         </button>
-                        <button className="btn look-btn" disabled={!savedListId} 
-                            onClick={() => window.location.href = `/list/${listId}`}>
+                        <button className="btn look-btn" disabled={!hasSavedLists}
+                            onClick={() => window.location.href = `/list`}>
                                 Look at Favourite List
                         </button>
                     </div>

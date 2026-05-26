@@ -67,12 +67,66 @@
     justify-content: center;
     align-items: flex-start;
     max-width: 1200px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .movies, .favourite-area, .lists-area {
     border: 1px solid #cc7777;
     border-radius: 8px;
     padding: 20px;
+}
+
+.lists-area {
+    width: 70%;
+}
+
+.list-zone {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-zone .remove-btn img {
+    width: 25px;
+    height: 25px;
+}
+
+.list-box {
+    border: 1px solid #cc7777;
+    width: 90%;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.list-box * {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.list-box .title {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 22px;
+}
+
+.list-box .saved-movies {
+    margin-top: 20px;
+}
+
+.list-box .saved-movie {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.saved-movie .link-btn {
+    width: 60px;
+    height: 25px;
+    background-color: rgb(255, 213, 0);
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 800;
 }
 
 .movies {
@@ -158,6 +212,7 @@
     flex-direction: column;
     align-items: center; 
     gap: 10px;
+    margin-top: 15px;
 }
 
 .control input {
@@ -183,7 +238,35 @@
     font-size: 15px;
 }
 
-.control .add-btn:disabled {
+.control .btn:disabled {
     background-color: gray;
     color: black;
+}
+
+@media (max-width: 990px) and (min-width: 601px) {
+  .main-page .container {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .movies,
+  .favourite-area,
+  .lists-area {
+    width: 90%;
+  }
+
+  .search-area input {
+    width: 40vw;
+    max-width: 300px;
+  }
+
+  .search-btn {
+    width: 15vw;
+    max-width: 120px;
+  }
+
+  .control .btn {
+    width: 80%;
+  }
 }

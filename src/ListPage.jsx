@@ -8,9 +8,9 @@ export default function ListPage() {
         setAllLists(lists);
     },[]);
 
-    const deleteList = (listId) => {
-        const newLists = allLists.filter((list) => {
-            return list.id != listId;
+    const deleteList = (listIndex) => {
+        const newLists = allLists.filter((list,index) => {
+            return index != listIndex;
         });
 
         setAllLists(newLists);
@@ -26,28 +26,33 @@ export default function ListPage() {
             <div className="container">
                 <div className="lists-area">
                     {
-                        allLists.map((list) => {
-                            <div key={list.id} className="list-box">
-                                <div className="list-header">
-                                    <h2 className="title">{list.title}</h2>
+                        allLists.map((list,index) => (
+                            <div key={index} className="list-zone">
+                                <div className="list-box">
+                                    <div className="list-header">
+                                        <h2 className="title">{list.title}</h2>
+                                    </div>
+                                    <div className="saved-movies">
+                                        {
+                                            list.movies.map((movie) => (
+                                                <div key={movie.imdbID} className="saved-movie">
+                                                    <h3 className="movie-title">{movie.Title}</h3>
+                                                    <a href={`https://www.imdb.com/title/${movie.imdbID}/`}
+                                                        target="_blank">
+                                                        <button className="btn link-btn">
+                                                            IMDB
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
                                 </div>
-                                <div className="saved-movies">
-                                    {
-                                        lists.movies.map((movie) => {
-                                            <div key={movie.imdbID} className="saved-movie">
-                                                <h3 className="movie-title">{movie.Title}</h3>
-                                                <a href={`https://www.imdb.com/title/${movie.imdbID}/`}
-                                                    target="_blank">
-                                                    <button className="btn link-btn">
-                                                        IMDB
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        })
-                                    }
-                                </div>
+                                <button className="btn remove-btn" onClick={() => deleteList(index)}>
+                                    <img src="./src/assets/red-x-icon.svg" alt="Remove" />
+                                </button>
                             </div>
-                        })
+                        ))
                     }
                 </div>
             </div>
