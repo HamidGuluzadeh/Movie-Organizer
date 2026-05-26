@@ -17,31 +17,37 @@
     color: white;
 }
 
+.main-page .heading h1 {
+    font-weight: 900;
+    font-style: italic;
+}
+
 .search-area {
     display: flex;
     justify-content: center;
-    gap: 5px;
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .search-area input {
-    width: 16vw;
-    max-width: 150px;
-    height: 22px;
+    width: 20vw;
+    max-width: 200px;
+    height: 30px;
     border-radius: 5px;
     border: 1px solid gray;
     padding: 0 5px;
+    font-size: 15px;
 }
 
 .search-btn {
-    width: 7vw;
-    max-width: 80px;
+    width: 8vw;
+    max-width: 90px;
     background-color: blueviolet;
     border: 1px solid gray;
     border-radius: 5px;
     color: white;
-    height: 22px;
-    font-size: 13px;
+    height: 30px;
+    font-size: 15px;
 }
 
 .container {
@@ -65,6 +71,50 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-height: 150px;
+}
+
+.movie-card {
+    display: flex;
+}
+
+.movie-info {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.movie-info h2 {
+    font-size: 25px;
+}
+
+.movie-info h2, .movie-info p {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.movie-poster {
+    width: 50%;
+}
+
+.movie-poster img {
+    width: 200px;
+}
+
+.fav-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    color: white;
+    background-color: blueviolet;
+    font-size: 15px;
+    margin-top: 15px;
 }
 
 .favourite-area {
@@ -78,6 +128,22 @@
     flex-grow: 1; 
 }
 
+.favourite-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.remove-btn img {
+    width: 17px;
+    height: 17px;
+}
+
+.remove-btn {
+    border: none;
+    background-color: white;
+}
+
 .control {
     display: flex;
     flex-direction: column;
@@ -87,10 +153,11 @@
 
 .control input {
     width: 100%;
-    height: 25px;
+    height: 30px;
     border: 1px solid gray;
     border-radius: 5px;
     padding: 0 10px;
+    font-size: 15px;
 }
 
 .control .btn {
@@ -101,8 +168,13 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    height: 25px;
+    height: 30px;
     color: white;
     background-color: blueviolet;
-    font-size: 13px;
+    font-size: 15px;
+}
+
+.control .add-btn:disabled {
+    background-color: gray;
+    color: black;
 }
