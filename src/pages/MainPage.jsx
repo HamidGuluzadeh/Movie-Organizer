@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import SearchArea from "../components/SearchArea";
+import MovieCard from "../components/MovieCard";
+import FavouriteMovie from "../components/FavouriteMovie";
+import ControlArea from "../components/ControlArea";
+import "../style.css";
 
 export default function MainPage() {
     const [search, setSearch] = useState("");
@@ -101,61 +107,27 @@ export default function MainPage() {
 
     return (
         <div className="main-page">
-            <div className="heading">
-                <h1>MOVIE</h1>
-            </div>
-            <div className="search-area">
-                <div className="search-bar">
-                    <input type="text" value={search} placeholder="Search" 
-                        onChange={(event) => setSearch(event.target.value)} />
-                </div>
-                <div className="search-button">
-                    <button className="btn search-btn" onClick={searchMovies}>Search</button>
-                </div>
-            </div>
+            <Header />
+            <SearchArea searchValue={search} onSearchChange={setSearch} onSearchSubmit={searchMovies} />
             <div className="container">
                 <div className="movies">
                     {
                         movies.map((movie) => (
-                            <div className="movie-card" key={movie.imdbID}>
-                                <div className="movie-poster">
-                                    <img src={movie.Poster} alt={movie.Title} />
-                                </div>
-                                <div className="movie-info">
-                                    <h2>{movie.Title}</h2>
-                                    <p>Year: {movie.Year}</p>
-                                    <button className="btn fav-btn" onClick={() => addToFavourites(movie)}>
-                                        + Favourite
-                                    </button>
-                                </div>
-                            </div>
+                            <MovieCard key={movie.imdbID} movie={movie} onAdd={addToFavourites} />
                         ))
                     }
                 </div>
                 <div className="favourite-area">
                     <div className="favourite-list">
                         {
-                            favourites.map((fav) => (
-                                <div className="favourite-item" key={fav.imdbID}>
-                                    <div>{fav.Title}</div>
-                                    <button className="btn remove-btn" onClick={() => removeFavourite(fav.imdbID)}>
-                                        <img src="./src/assets/54473.png" alt="Remove" />
-                                    </button>
-                                </div>
+                            favourites.map((favourite) => (
+                                <FavouriteMovie key={favourite.imdbID} favourite={favourite} 
+                                    removeFavourite={removeFavourite} />
                             ))
                         }
                     </div>
-                    <div className="control">
-                        <input type="text" onChange={(event) => setListName(event.target.value)} />
-                        <button className="btn add-btn" disabled={favourites.length == 0 || !listName.trim()} 
-                            onClick={saveList}>
-                                Add to Favourite List
-                        </button>
-                        <button className="btn look-btn" disabled={!hasSavedLists}
-                            onClick={() => window.location.href = `/list`}>
-                                Look at Favourite List
-                        </button>
-                    </div>
+                    <ControlArea listName={listName} setListName={setListName} favouritesCount={favourites.length} 
+                        saveList={saveList} hasSavedLists={hasSavedLists} />
                 </div>
             </div>
         </div>

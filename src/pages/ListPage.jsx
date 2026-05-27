@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import "../style.css";
 
 export default function ListPage() {
     const [allLists, setAllLists] = useState([]);
@@ -20,9 +22,7 @@ export default function ListPage() {
 
     return (
         <div className="list-page">
-            <div className="heading">
-                <h1>MOVIE</h1>
-            </div>
+            <Header />
             <div className="container">
                 <div className="lists-area">
                     {
