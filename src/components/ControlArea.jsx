@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../style.css";
 
 export default function ControlArea({ 
@@ -8,6 +9,8 @@ export default function ControlArea({
     saveList, 
     hasSavedLists 
 }) {
+    const navigate = useNavigate();
+
     return (
         <div className="control">
             <input type="text" value={listName} onChange={(event) => setListName(event.target.value)} />
@@ -16,7 +19,7 @@ export default function ControlArea({
                     Add to Favourite List
             </button>
             <button className="btn look-btn" disabled={!hasSavedLists}
-                onClick={() => window.location.href = `/list`}>
+                onClick={() => navigate("/list")}>
                     Look at Favourite List
             </button>
         </div>
